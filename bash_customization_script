@@ -14,22 +14,30 @@ else
     DISTRO_ICON=""
 fi
 
-# 2. Load Git Prompt (Local Copy)
+# 2. Detect Context (Host vs Container)
+# If CONTAINER_ID is set (Distrobox sets this), use it. Otherwise, say "host".
+if [ -n "$CONTAINER_ID" ]; then
+    CONTEXT_LABEL="$CONTAINER_ID"
+else
+    CONTEXT_LABEL="host"
+fi
+
+# 3. Load Git Prompt (Local Copy)
 if [ -f ~/.git-prompt.sh ]; then
     source ~/.git-prompt.sh
 fi
 
-# 3. Configure Git Status
+# 4. Configure Git Status
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-# 4. Define Colors
-# \[ ... \] tells bash these characters don't take up space (prevents wrapping bugs)
+# 5. Define Colors
 RESET="\[\e[0m\]"
 GREEN="\[\e[32m\]"
 BLUE="\[\e[34m\]"
+CYAN="\[\e[36m\]"  # Added Cyan for the context label
 
-# 5. Build PS1
-# We step out of the single quotes ' ' to insert variables like $GREEN
-export PS1='('$DISTRO_ICON')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n-> '
+# 6. Build PS1
+# Format: (CONTEXT) (ICON) user@host [path] (branch)
+export PS1='[('$DISTRO_ICON')'$CYAN$CONTEXT_LABEL$RESET']'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n-> '
