@@ -4,40 +4,31 @@
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     case "$ID" in
-        arch)   DISTRO_ICON="" ;;
-        fedora) DISTRO_ICON="" ;;
-        ubuntu) DISTRO_ICON="" ;;
-        opensuse*)  DISTRO_ICON="" ;;
-        *)      DISTRO_ICON="" ;;
+        arch)   DISTRO_ICON="<U+F303>" ;;
+        fedora) DISTRO_ICON="<U+F30A>" ;;
+        ubuntu) DISTRO_ICON="<U+F31B>" ;;
+        opensuse*)  DISTRO_ICON="<U+F314>" ;;
+        *)      DISTRO_ICON="<U+F17C>" ;;
     esac
 else
-    DISTRO_ICON=""
+    DISTRO_ICON="<U+F17C>"
 fi
 
-# 2. Detect Context (Host vs Container)
-# If CONTAINER_ID is set (Distrobox sets this), use it. Otherwise, say "host".
-if [ -n "$CONTAINER_ID" ]; then
-    CONTEXT_LABEL="$CONTAINER_ID"
-else
-    CONTEXT_LABEL="host"
-fi
-
-# 3. Load Git Prompt (Local Copy)
+# 2. Load Git Prompt (Local Copy)
 if [ -f ~/.git-prompt.sh ]; then
     source ~/.git-prompt.sh
 fi
 
-# 4. Configure Git Status
+# 3. Configure Git Status
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-# 5. Define Colors
+# 4. Define Colors
 RESET="\[\e[0m\]"
 GREEN="\[\e[32m\]"
 BLUE="\[\e[34m\]"
-CYAN="\[\e[36m\]"  # Added Cyan for the context label
+CYAN="\[\e[36m\]"
 
-# 6. Build PS1
-# Format: (CONTEXT) (ICON) user@host [path] (branch)
-export PS1='[('$DISTRO_ICON')'$CYAN$CONTEXT_LABEL$RESET']'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n-> '
+# 5. Build PS1
+export PS1=''$CYAN'('$DISTRO_ICON')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n<U+F061> '
