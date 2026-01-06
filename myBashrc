@@ -7,9 +7,6 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias dev-java='distrobox enter dev-java'
-alias dev-web='distrobox enter dev-web'
-
 PS1='[\u@\h \W]\$ '
 
 # Atuin:
@@ -18,39 +15,13 @@ PS1='[\u@\h \W]\$ '
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
 
-# Load custom prompt if it exists
-if [ -f ~/.bash-customization.sh ]; then
-  . ~/.bash-customization.sh
-fi
-
-clear
-
 # Homebrew:
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-#zoxide:
-eval "$(zoxide init bash)"
+alias dev-java='distrobox enter --no-workdir dev-java'
+alias dev-web='distrobox enter --no-workdir dev-web'
 
-# setting up nvim as default editor:
-export EDITOR=nvim
-export VISUAL=nvim
-
-# Check if we are inside a Distrobox
-if [ -n "$CONTAINER_ID" ]; then
-    
-    # Switch logic based on the Container Name
-    case "$CONTAINER_ID" in
-        "dev-java")
-            export PATH="$HOME/distrobox_bins/jdtls/bin:$PATH"
-            ;;
-            
-    	"dev-web")
-            export PATH="$HOME/distrobox_bins/opensuse_node_modules/bin:$PATH"
-            ;;
-            
-        "my-other-box")
-            # You can add more containers here...
-            ;;
-    esac
-    
+# Load custom prompt if it exists
+if [ -f ~/.bash-customization.sh ]; then
+  . ~/.bash-customization.sh
 fi
