@@ -31,4 +31,4 @@ BLUE="\[\e[34m\]"
 CYAN="\[\e[36m\]"
 
 # 5. Build PS1
-export PS1=''$CYAN'('$DISTRO_ICON')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n<U+F061> '
+export PS1=''$CYAN'('$DISTRO_ICON')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n '
