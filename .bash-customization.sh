@@ -30,5 +30,6 @@ GREEN="\[\e[32m\]"
 BLUE="\[\e[34m\]"
 CYAN="\[\e[36m\]"
 
-# 5. Build PS1
-export PS1=''$CYAN'('$DISTRO_ICON')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n '
+# 5. Build PS1 
+# add $CONTAINER_ID somewhere here, if setting this in container 
+export PS1='('$CYAN''$DISTRO_ICON''$RESET')'$GREEN'\u'$RESET'@'$BLUE'\h'$RESET'[\w]$(__git_ps1 " (%s)")\n '
