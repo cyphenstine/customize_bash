@@ -4,14 +4,14 @@
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     case "$ID" in
-        arch)   DISTRO_ICON="<U+F303>" ;;
-        fedora) DISTRO_ICON="<U+F30A>" ;;
-        ubuntu) DISTRO_ICON="<U+F31B>" ;;
-        opensuse*)  DISTRO_ICON="<U+F314>" ;;
-        *)      DISTRO_ICON="<U+F17C>" ;;
+        arch)   DISTRO_ICON="" ;;
+        fedora) DISTRO_ICON="" ;;
+        ubuntu) DISTRO_ICON="" ;;
+        opensuse*)  DISTRO_ICON="" ;;
+        *)      DISTRO_ICON="" ;;
     esac
 else
-    DISTRO_ICON="<U+F17C>"
+    DISTRO_ICON=""
 fi
 
 # 2. Load Git Prompt (Local Copy)
